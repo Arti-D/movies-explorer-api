@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { isURL } = require("validator");
+const mongoose = require('mongoose');
+const { isURL } = require('validator');
 
 const movieSchema = mongoose.Schema({
   country: {
@@ -39,7 +39,7 @@ const movieSchema = mongoose.Schema({
   },
   owner: {
     type: mongoose.SchemaTypes.ObjectId,
-    ref: "user",
+    ref: 'user',
     required: true,
   },
   movieId: {
