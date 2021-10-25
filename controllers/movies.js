@@ -1,11 +1,16 @@
 const Movie = require('../models/movie');
 
 // ОШИБКИ
+const NotFoundError = require('../errors/NotFoundErr');
+const ForbiddenErr = require('../errors/ForbiddenErr');
+const BadRequestErr = require('../errors/BadRequestErr');
+
+const successCode = require('../errors/status-codes/success-codes');
 
 // FUNCTIONS
 const getMovies = (req, res, next) => {
   Movie.find({ 'owner._id': req.user._id })
-    .then((cards) => res.status().send({ data: cards }))
+    .then((cards) => res.status(successCode.SUCCESS_CODE).send({ data: cards }))
     .catch((err) => next(err));
 };
 
@@ -37,7 +42,7 @@ const createMovie = (req, res, next) => {
     nameRU,
     nameEN,
     owner,
-  }).then((movie) => res.status().send(movie))
+  }).then((movie) => res.status(successCode.SUCCESS_CODE).send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError' || err.name === 'BadRequest') {
         next(new BadRequestErr('Переданы некорректные данные'));

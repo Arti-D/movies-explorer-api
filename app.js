@@ -14,7 +14,7 @@ const routerMovies = require('./routes/movies');
 const { requestLogger, errorLogger } = require('../../react-mesto-api-full/backend/middlewares/logger');
 
 // ПЕРЕМЕННЫЕ ОШИБОК
-// const errorsHandler = require('./errors/errorsHandler');
+const errorsHandler = require('./errors/errorsHandler');
 
 // ПРИЛОЖЕНИЕ
 const app = express();
@@ -67,7 +67,7 @@ app.use(errorLogger);
 
 // ОБРАБОТКА ОШИБОК
 app.use(errors());
-// app.use(errorsHandler);
+app.use(errorsHandler);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
