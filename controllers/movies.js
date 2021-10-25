@@ -9,6 +9,44 @@ const getMovies = (req, res, next) => {
     .catch((err) => next(err));
 };
 
+const createMovie = (req, res, next) => {
+  const {
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailer,
+    thumbnail,
+    movieId,
+    nameRU,
+    nameEN,
+  } = req.body;
+  const owner = req.user._id;
+  Movie.create({
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailer,
+    thumbnail,
+    movieId,
+    nameRU,
+    nameEN,
+    owner,
+  }).then((movie) => res.status().send(movie))
+    .catch((err) => {
+      if (err.name === 'ValidationError' || err.name === 'CastError' || err.name === 'BadRequest') {
+        next(new BadRequestErr('Переданы некорректные данные'));
+      } else {
+        next(err);
+      }
+    });
+};
+
 const deleteMovie = (req, res, next) => {
   Movie.findById(req.params.movieId)
     .then((movie) => {
@@ -33,5 +71,6 @@ const deleteMovie = (req, res, next) => {
 
 module.exports = {
   getMovies,
+  createMovie,
   deleteMovie,
 };
