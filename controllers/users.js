@@ -1,10 +1,16 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const { JWT_SECRET = 'RELLY_SECRET' } = process.env;
+const { JWT_SECRET = 'REALLY_SECRET' } = process.env;
 const User = require('../models/user');
 
 // ОШИБКИ
+const NotFoundError = require('../errors/NotFoundErr');
+const UnauthorizedError = require('../errors/UnauthorizedErr');
+const BadRequestErr = require('../errors/BadRequestErr');
+const ConflictingRequestErr = require('../errors/ConflictingRequestErr');
+
+const successCode = require('../errors/status-codes/success-codes');
 
 // FUNCTIONS
 const createUser = (req, res, next) => {
@@ -49,6 +55,7 @@ const getCurrentUser = (req, res, next) => {
       }
     });
 };
+
 const updateProfile = (req, res, next) => {
   User.findByIdAndUpdate(
     req.user._id,

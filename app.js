@@ -11,7 +11,7 @@ const auth = require('./middlewares/auth');
 // РОУТЫ
 const routerUsers = require('./routes/users');
 const routerMovies = require('./routes/movies');
-const { requestLogger, errorLogger } = require('../../react-mesto-api-full/backend/middlewares/logger');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 // ПЕРЕМЕННЫЕ ОШИБОК
 const errorsHandler = require('./errors/errorsHandler');
@@ -52,11 +52,11 @@ app.get('/crash-test', () => {
 });
 
 app.post('/signin', userControllers.login);
-app.post('./signup', userControllers.createUser);
+app.post('/signup', userControllers.createUser);
 app.use(auth);
 app.head('/logOut', userControllers.logOut);
 app.use('/users', routerUsers);
-app.use('movies', routerMovies);
+app.use('/movies', routerMovies);
 
 app.use((req, res, next) => {
   next(new Error('page is not found'));
