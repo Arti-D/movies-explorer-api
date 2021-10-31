@@ -9,7 +9,7 @@ const successCode = require('../errors/status-codes/success-codes');
 
 // FUNCTIONS
 const getMovies = (req, res, next) => {
-  Movie.find({ 'owner._id': req.user._id })
+  Movie.find({})
     .then((cards) => res.status(successCode.SUCCESS_CODE).send({ data: cards }))
     .catch((err) => next(err));
 };

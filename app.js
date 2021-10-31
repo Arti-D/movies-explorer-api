@@ -18,11 +18,12 @@ const errorsHandler = require('./errors/errorsHandler');
 
 // ПРИЛОЖЕНИЕ
 const app = express();
-const { PORT = 3002 } = process.env;
+const { PORT = 3000 } = process.env;
 
 // ПОДКЛЮЧЕНИЕ К БД
+const { BD_ADDRESS = 'localhost:27017/dpmoviesdb' } = process.env;
 mongoose
-  .connect('mongodb://localhost:27017/dpmoviesdb', {
+  .connect(`mongodb://${BD_ADDRESS}`, {
     useNewUrlParser: true,
   })
   .then(() => console.log('DB connected'))
@@ -31,7 +32,7 @@ mongoose
 app.use(
   cors({
     origin: [
-      // сайты
+      'http://localhost:3000',
     ],
     credentials: true,
   }),
