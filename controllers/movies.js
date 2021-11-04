@@ -66,11 +66,7 @@ const deleteMovie = (req, res, next) => {
       });
     })
     .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError' || err.name === 'BadRequest') {
-        next(new BadRequestErr('Переданы некорректные данные'));
-      } else {
-        next(err);
-      }
+      next(err);
     });
 };
 
