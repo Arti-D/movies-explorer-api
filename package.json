@@ -1,7 +1,7 @@
 {
   "name": "movie-explorer-diploma",
   "version": "1.0.0",
-  "description": "",
+  "description": "бэк для дипломной работы в yandex.praktikum",
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
