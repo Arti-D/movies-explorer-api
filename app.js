@@ -5,17 +5,14 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
-// const userControllers = require('./controllers/users');
-// const auth = require('./middlewares/auth');
 
 // РОУТЫ
-// const routerUsers = require('./routes/users');
-// const routerMovies = require('./routes/movies');
-const router = require('./routes/router');
+const router = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 // ПЕРЕМЕННЫЕ ОШИБОК
 const errorsHandler = require('./errors/errorsHandler');
+const NotFoundErr = require('./errors/NotFoundErr');
 
 // ПРИЛОЖЕНИЕ
 const app = express();
@@ -54,13 +51,10 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-// app.post('/signin', userControllers.login);
-// app.post('/signup', userControllers.createUser);
-// app.use(auth);
-// app.head('/logOut', userControllers.logOut);
-// app.use('/users', routerUsers);
-// app.use('/movies', routerMovies);
 app.use(router);
+app.use((req, res, next) => {
+  next(new NotFoundErr('Такой страницы не существует'));
+});
 
 app.use((req, res, next) => {
   next(new Error('page is not found'));

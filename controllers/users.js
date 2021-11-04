@@ -74,6 +74,8 @@ const updateProfile = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError' || err.name === 'BadRequest') {
         next(new BadRequestErr('Переданы некорректные данные'));
+      } else if (err.name === 'MongoError' || err.code === 11000) {
+        next(new ConflictingRequestErr('Такой пользователь уже существует'));
       } else {
         next(err);
       }
@@ -97,7 +99,7 @@ const login = (req, res, next) => {
       if (err.name === 'ValidationError' || err.name === 'CastError' || err.name === 'BadRequest') {
         next(new BadRequestErr('Переданы некорректные данные'));
       } else {
-        next(new UnauthorizedError('Неверный логин или пароль'));
+        next(err);
       }
     });
 };
