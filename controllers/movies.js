@@ -61,7 +61,7 @@ const deleteMovie = (req, res, next) => {
       if (!movie.owner._id.equals(req.user._id)) {
         throw new ForbiddenErr('Доступ ограничен');
       }
-      movie.deleteOne(movie).then(() => {
+      return movie.deleteOne(movie).then(() => {
         res.status(successCode.SUCCESS_CODE).send(movie);
       });
     })

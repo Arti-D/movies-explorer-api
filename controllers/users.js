@@ -6,7 +6,6 @@ const User = require('../models/user');
 
 // ОШИБКИ
 const NotFoundError = require('../errors/NotFoundErr');
-const UnauthorizedError = require('../errors/UnauthorizedErr');
 const BadRequestErr = require('../errors/BadRequestErr');
 const ConflictingRequestErr = require('../errors/ConflictingRequestErr');
 
@@ -26,7 +25,10 @@ const createUser = (req, res, next) => {
     }))
     .then((newUser) => {
       User.findById(newUser._id)
-        .then((user) => res.status(successCode.SUCCESS_CODE).send({ data: user }));
+        .then((user) => res.status(successCode.SUCCESS_CODE).send({ data: user }))
+        .catch((err) => {
+          next(err);
+        });
     })
     .catch((err) => {
       if (err.name === 'MongoError' || err.code === 11000) {
