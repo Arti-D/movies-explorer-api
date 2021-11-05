@@ -20,15 +20,23 @@ const validateUser = celebrate({
 const validateNewMovie = celebrate({
   body: Joi.object()
     .keys({
-      name: Joi.string().required().min(2).max(30),
-      link: Joi.string().required().pattern(/http[s]?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-azA-Z0-9()@:%_.+~#?&/=]*)/m),
+      country: Joi.string().required(),
+      director: Joi.string().required(),
+      duration: Joi.string().required(),
+      year: Joi.string().required(),
+      description: Joi.string().required(),
+      image: Joi.string().required().pattern(/http[s]?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-azA-Z0-9()@:%_.+~#?&/=]*)/m),
+      trailer: Joi.string().required().pattern(/http[s]?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-azA-Z0-9()@:%_.+~#?&/=]*)/m),
+      thumbnail: Joi.string().required().pattern(/http[s]?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-azA-Z0-9()@:%_.+~#?&/=]*)/m),
+      nameRU: Joi.string().required(),
+      nameEN: Joi.string().required(),
     }),
 });
 
-const validateCard = celebrate({
+const validateMovie = celebrate({
   body: Joi.object().keys({
     params: {
-      cardId: Joi.string().required().hex().length(24),
+      movieId: Joi.string().required().hex().length(24),
     },
   }),
 });
@@ -37,5 +45,5 @@ module.exports = {
   validateNewUser,
   validateUser,
   validateNewMovie,
-  validateCard,
+  validateMovie,
 };
