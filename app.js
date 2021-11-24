@@ -7,7 +7,10 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 
 // РОУТЫ
-const router = require('./routes/index');
+const auth = require('./middlewares/auth');
+const usersRouter = require('./routes/users');
+const movieRouter = require('./routes/movies');
+const authoriziationRoter = require('./routes/authorithation');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 // ПЕРЕМЕННЫЕ ОШИБОК
@@ -51,7 +54,11 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(router);
+app.use('/', authoriziationRoter);
+app.use(auth);
+app.use('/users', usersRouter);
+app.use('/movies', movieRouter);
+
 app.use((req, res, next) => {
   next(new NotFoundErr('Такой страницы не существует'));
 });
