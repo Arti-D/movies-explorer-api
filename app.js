@@ -16,7 +16,7 @@ const NotFoundErr = require('./errors/NotFoundErr');
 
 // ПРИЛОЖЕНИЕ
 const app = express();
-const { PORT = 3000 } = process.env;
+const { PORT = 3007 } = process.env;
 
 // ПОДКЛЮЧЕНИЕ К БД
 const { BD_ADDRESS = 'localhost:27017/dpmoviesdb' } = process.env;
