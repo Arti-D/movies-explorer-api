@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 
 // РОУТЫ
-const router = require('./routes');
+const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 // ПЕРЕМЕННЫЕ ОШИБОК
@@ -16,7 +16,7 @@ const NotFoundErr = require('./errors/NotFoundErr');
 
 // ПРИЛОЖЕНИЕ
 const app = express();
-const { PORT = 3007 } = process.env;
+const { PORT = 3000 } = process.env;
 
 // ПОДКЛЮЧЕНИЕ К БД
 const { BD_ADDRESS = 'localhost:27017/dpmoviesdb' } = process.env;
@@ -54,10 +54,6 @@ app.get('/crash-test', () => {
 app.use(router);
 app.use((req, res, next) => {
   next(new NotFoundErr('Такой страницы не существует'));
-});
-
-app.use((req, res, next) => {
-  next(new Error('page is not found'));
 });
 
 // ЛОГГЕР
