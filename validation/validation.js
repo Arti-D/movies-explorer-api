@@ -28,6 +28,7 @@ const validateNewMovie = celebrate({
       image: Joi.string().required().pattern(/http[s]?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-azA-Z0-9()@:%_.+~#?&/=]*)/m),
       trailer: Joi.string().required().pattern(/http[s]?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-azA-Z0-9()@:%_.+~#?&/=]*)/m),
       thumbnail: Joi.string().required().pattern(/http[s]?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-azA-Z0-9()@:%_.+~#?&/=]*)/m),
+      movieId: Joi.string().required(),
       nameRU: Joi.string().required(),
       nameEN: Joi.string().required(),
     }),
