@@ -35,6 +35,8 @@ app.use(
     origin: [
       'http://localhost:3000',
       'https://localhost:3000',
+      'http://dmovies-explorer.arti.nomoredomains.rocks',
+      'https://dmovies-explorer.arti.nomoredomains.rocks',
     ],
     credentials: true,
   }),
