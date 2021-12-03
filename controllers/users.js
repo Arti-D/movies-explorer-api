@@ -95,7 +95,7 @@ const login = (req, res, next) => {
         sameSite: true,
         maxAge: 3600000 * 24 * 7,
       })
-        .send(user);
+        .send({ name: user.name, email: user.email, token});
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError' || err.name === 'BadRequest') {
