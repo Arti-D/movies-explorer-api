@@ -5,37 +5,45 @@ const movieSchema = mongoose.Schema({
   country: {
     type: String,
     required: true,
+    default: '',
   },
   director: {
     type: String,
     required: true,
+    default: '',
   },
   duration: {
     type: String,
     required: true,
+    default: '',
   },
   year: {
     type: String,
     required: true,
+    default: '',
   },
   description: {
     type: String,
     required: true,
+    default: '',
   },
   image: {
     type: String,
     required: true,
     validate: isURL,
+    default: '',
   },
   trailer: {
     type: String,
     required: true,
     validate: isURL,
+    default: '',
   },
   thumbnail: {
     type: String,
     required: true,
     validate: isURL,
+    default: '',
   },
   owner: {
     type: mongoose.SchemaTypes.ObjectId,
@@ -49,10 +57,12 @@ const movieSchema = mongoose.Schema({
   nameRU: {
     type: String,
     required: true,
+    default: '',
   },
   nameEN: {
     type: String,
     required: true,
+    default: '',
   },
 }, { versionKey: false });
 
